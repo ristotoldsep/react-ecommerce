@@ -1,7 +1,6 @@
 .category_container {
     min-width: 30%;
-    height: 240px;
-    flex: 1 1 auto;
+    flex: 1; // Set to 1 to make boxes fill both horizontally and vertically
     display: flex;
     align-items: center;
     justify-content: center;
@@ -42,8 +41,8 @@
     }
 
     .category_body_container {
-        height: 90px;
-        padding: 0 25px;
+        height: 100px;
+        padding: 15px 25px;
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -58,11 +57,13 @@
             margin: 0 6px 0;
             font-size: 22px;
             color: #4a4a4a;
+            text-transform: uppercase;
         }
 
         p {
             font-weight: lighter;
             font-size: 16px;
+            margin-bottom: 0;
         }
     }
 }
