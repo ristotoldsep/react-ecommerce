@@ -12,22 +12,25 @@
     }
 }
 
-.sign-up-container {
+.sign-in-container {
     display: flex;
     flex-direction: column;
     width: 410px;
 
     @include tablet {
         width: 100%;
-        margin-top: 60px;
     }
     
     @include phone {
         width: 100%;
-        margin-top: 60px;
     }
 
     h2 {
         margin-top: 10px 0;
+    }
+
+    .buttons-container {
+        display: flex;
+        justify-content: space-between;
     }
 }

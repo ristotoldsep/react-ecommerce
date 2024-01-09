@@ -12,22 +12,23 @@
     }
 }
 
-.sign-up-container {
+.authentication-container {
     display: flex;
-    flex-direction: column;
-    width: 410px;
+    justify-content: space-between;
+    width: 1050px;
+    margin: 30px auto;
+    min-height: calc(100vh - 134px - 112px - 60px);
+    padding: 0 30px;
 
-    @include tablet {
+    @include tablet() {
+        display: grid;
+        grid-template-columns: 1fr;
         width: 100%;
-        margin-top: 60px;
     }
-    
+
     @include phone {
+        display: grid;
+        grid-template-columns: 1fr;
         width: 100%;
-        margin-top: 60px;
-    }
-
-    h2 {
-        margin-top: 10px 0;
     }
 }

@@ -7,7 +7,7 @@ import {
   createAuthUserWithEmailAndPassword,
   createUserDocumentFromAuth,
 } from "../../utils/firebase/firebase.utils";
-import { Form } from "react-router-dom";
+
 import Button from "../button/button.component";
 
 const defaultFormFields = {
@@ -62,8 +62,8 @@ const SignUpForm = () => {
   const handleChange = (event) => {
     const { name, value } = event.target;
 
-    console.log(event.target);
-    console.log(formFields);
+    // console.log(event.target);
+    // console.log(formFields);
 
     setFormFields({ ...formFields, [name]: value });
   };
