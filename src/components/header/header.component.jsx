@@ -5,11 +5,20 @@ import './header.styles.scss';
 
 import { UserContext } from "../../contexts/user.context";
 
+import { signOutUser } from "../../utils/firebase/firebase.utils";
+
 const Header = () => {
 
-  const { currentUser } = useContext(UserContext);
+  const { currentUser, setCurrentUser } = useContext(UserContext);
 
   console.log(currentUser);
+
+  const signOutHandler = async () => {
+    const response = await signOutUser();
+    console.log(response);
+
+    setCurrentUser(null);
+  }
 
   return (
     <div className="navigation">
@@ -21,9 +30,9 @@ const Header = () => {
           SHOP
         </Link>
         {currentUser ? (
-          <Link className="nav-link" to="/auth">
+          <span className="nav-link" onClick={signOutHandler}>
             SIGN OUT
-          </Link>
+          </span>
         ) : (
           <Link className="nav-link" to="/auth">
             SIGN IN
