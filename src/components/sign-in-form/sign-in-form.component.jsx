@@ -1,4 +1,4 @@
-import { useState, useContext } from "react";
+import { useState/* , useContext */ } from "react";
 
 // import { useEffect } from "react";
 // import { getRedirectResult } from "firebase/auth";
@@ -6,7 +6,7 @@ import { useState, useContext } from "react";
 import FormInput from "../form-input/form-input.component";
 import './sign-in-form.styles.scss';
 
-import { UserContext } from "../../contexts/user.context";
+// import { UserContext } from "../../contexts/user.context";
 
 import {
   // auth,
@@ -28,7 +28,7 @@ const SignInForm = () => {
 
   const { email, password } = formFields;
 
-  const { setCurrentUser } = useContext(UserContext);
+  // const { setCurrentUser } = useContext(UserContext);
 
   const resetFormFields = () => {
     setFormFields(defaultFormFields);
@@ -40,7 +40,7 @@ const SignInForm = () => {
     try {
       const { user } = await signInAuthUserWithEmailAndPassword(email, password);
 
-      setCurrentUser(user);
+      // setCurrentUser(user);
 
       // Reset form fields after successful submission
       resetFormFields();
@@ -83,9 +83,10 @@ const SignInForm = () => {
   
 
   const signInWithGoogle = async () => {
-    const { user } = await signInWithGooglePopup(); // Destructuring response object
-    setCurrentUser(user);
-    const userDocRef = await createUserDocumentFromAuth(user);
+    // const { user } = await signInWithGooglePopup(); // Destructuring response object
+    await signInWithGooglePopup(); 
+    // setCurrentUser(user);
+    // const userDocRef = await createUserDocumentFromAuth(user);
     // console.log(response);
   };
 

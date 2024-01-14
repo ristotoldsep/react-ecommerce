@@ -9,16 +9,16 @@ import { signOutUser } from "../../utils/firebase/firebase.utils";
 
 const Header = () => {
 
-  const { currentUser, setCurrentUser } = useContext(UserContext);
+  const { currentUser/* , setCurrentUser */ } = useContext(UserContext);
 
   console.log(currentUser);
 
-  const signOutHandler = async () => {
-    const response = await signOutUser();
-    console.log(response);
+  // const signOutHandler = async () => {
+  //   const response = await signOutUser();
+  //   console.log(response);
 
-    setCurrentUser(null);
-  }
+  //   setCurrentUser(null);
+  // }
 
   return (
     <div className="navigation">
@@ -30,7 +30,7 @@ const Header = () => {
           SHOP
         </Link>
         {currentUser ? (
-          <span className="nav-link" onClick={signOutHandler}>
+          <span className="nav-link" onClick={signOutUser}>
             SIGN OUT
           </span>
         ) : (
