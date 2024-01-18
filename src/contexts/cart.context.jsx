@@ -39,19 +39,27 @@ const decreaseCartItem = (cartItems, cartItemToRemove) => {
   return cartItems; // If the item is not in the cart, return the unchanged array
 };
 
+const clearCartItem = (cartItems, cartItemToClear) => {
+  const updatedCartItems = cartItems.filter(item => item.id !== cartItemToClear.id);
+  return updatedCartItems;
+}
+
 export const CartContext = createContext({
   isCartOpen: false,
   setIsCartOpen: () => {},
   cartItems: [],
   addItemToCart: () => {},
   removeItemFromCart: () => {},
+  clearItemFromCart: () => {},
   cartCount: 0,
+  cartTotal: 0,
 });
 
 export const CartProvider = ({ children }) => {
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [cartItems, setCartItems] = useState([]);
   const [cartCount, setCartCount] = useState(0);
+  const [cartTotal, setCartTotal] = useState(0);
 
   useEffect(() => {
     // Calculate the total number of items in the cart
@@ -61,15 +69,29 @@ export const CartProvider = ({ children }) => {
 
   }, [cartItems])
 
+  useEffect(() => {
+    // Calculate the total number of items in the cart
+    const newCartTotal = cartItems.reduce((total, cartItem) => total + cartItem.quantity * cartItem.price, 0);
+
+    setCartTotal(newCartTotal);
+
+  }, [cartItems])
+
   const addItemToCart = (productToAdd) => {
     setCartItems(addCartItem(cartItems, productToAdd));
   }
 
+  // Decrease quantity and remove if 1 remaining
   const removeItemFromCart = (cartItemToRemove) => {
     setCartItems(decreaseCartItem(cartItems, cartItemToRemove));
   };
+  
+  // Remove X button functionality
+  const clearItemFromCart = (cartItemToClear) => {
+    setCartItems(clearCartItem(cartItems, cartItemToClear));
+  };
 
-  const value = { isCartOpen, setIsCartOpen, cartItems, addItemToCart, removeItemFromCart, cartCount };
+  const value = { isCartOpen, setIsCartOpen, cartItems, addItemToCart, removeItemFromCart, cartCount, cartTotal, clearItemFromCart };
 
   return <CartContext.Provider value={value}>{children}</CartContext.Provider>;
 };
