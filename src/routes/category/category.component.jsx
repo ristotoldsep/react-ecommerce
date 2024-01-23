@@ -19,8 +19,8 @@ export const Category = () => {
 
   return (
     <div className="category_page">
-        <div class="heading_container">
-            <span class="bg_title">
+        <div className="heading_container">
+            <span className="bg_title">
                 {category}
             </span>
             <h1 className="title">

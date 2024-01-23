@@ -4,6 +4,7 @@ import CategoriesPreview from '../categories-preview/categories-preview.componen
 import Category from '../category/category.component';
 
 import './shop.styles.scss';
+import ProductDetails from '../product-details/product-details.component';
 
 const Shop = () => {
 
@@ -11,6 +12,7 @@ const Shop = () => {
     <Routes>
       <Route index element={<CategoriesPreview />} />
       <Route path=':category' element={<Category />} />
+      <Route path='product/:productName' element={<ProductDetails />} />
     </Routes>
   );
 };
