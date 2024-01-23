@@ -1,6 +1,6 @@
-.category_container {
+.directory_item_container {
     min-width: 30%;
-    flex: 1; // Set to 1 to make boxes fill both horizontally and vertically
+    flex: 1;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -40,7 +40,7 @@
         background-position: center;
     }
 
-    .category_body_container {
+    .directory_item_body_container {
         height: 100px;
         padding: 15px 25px;
         display: flex;

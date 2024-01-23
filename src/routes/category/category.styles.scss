@@ -1,0 +1,38 @@
+.category_page {
+    padding-bottom: 80px;
+
+    .category-container {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        column-gap: 20px;
+        row-gap: 50px;
+        padding-left: 30px;
+        padding-right: 30px;
+    }
+
+    .heading_container {
+        position: relative;
+
+        .bg_title {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            top: -100px;
+            font-size: 200px;
+            -webkit-text-stroke-width: 1px;
+            -webkit-text-stroke-color: #00000033;
+            color: transparent;
+            font-family: sans-serif;
+            text-transform: uppercase;
+            z-index: -1;
+        }
+    
+        .title {
+            font-size: 38px;
+            margin-bottom: 25px;
+            text-transform: uppercase;
+            text-align: center;
+        }
+    }
+
+}

@@ -1,0 +1,41 @@
+import { useContext, useState, useEffect, Fragment } from "react";
+
+import { useParams } from "react-router-dom";
+
+import "./category.styles.scss";
+
+import { CategoriesContext } from "../../contexts/categories.context";
+import ProductCard from "../../components/product-card/product-card.component";
+
+export const Category = () => {
+  const { category } = useParams();
+  const { categoriesMap } = useContext(CategoriesContext);
+  const [products, setProducts] = useState(categoriesMap[category]);
+
+  useEffect(() => {
+    // if URL is /shop/hats, useParams will get 'hats' and hash match it in categoriesMap
+    setProducts(categoriesMap[category]);
+  }, [category, categoriesMap]);
+
+  return (
+    <div className="category_page">
+        <div class="heading_container">
+            <span class="bg_title">
+                {category}
+            </span>
+            <h1 className="title">
+                {category}
+            </h1>
+        </div>
+        <div className="category-container">
+
+        {products &&
+            products.map((product) => (
+            <ProductCard key={product.id} product={product} />
+            ))}
+        </div>
+    </div>
+  );
+};
+
+export default Category;
