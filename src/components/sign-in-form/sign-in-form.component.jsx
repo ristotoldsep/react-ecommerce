@@ -12,11 +12,11 @@ import {
   // auth,
   // signInWithGoogleRedirect,
   signInWithGooglePopup,
-  createUserDocumentFromAuth,
+  // createUserDocumentFromAuth,
   signInAuthUserWithEmailAndPassword
 } from "../../utils/firebase/firebase.utils";
 
-import Button from "../button/button.component";
+import Button, { BUTTON_TYPE_CLASSES } from "../button/button.component";
 
 const defaultFormFields = {
   email: "",
@@ -41,6 +41,8 @@ const SignInForm = () => {
       const { user } = await signInAuthUserWithEmailAndPassword(email, password);
 
       // setCurrentUser(user);
+      
+      console.log(user);
 
       // Reset form fields after successful submission
       resetFormFields();
@@ -118,7 +120,7 @@ const SignInForm = () => {
 
         <div className="buttons-container">
           <Button type="submit">Sign in</Button>
-          <Button type="button" buttonType="google" onClick={signInWithGoogle}>
+          <Button type="button" buttonType={BUTTON_TYPE_CLASSES.google} onClick={signInWithGoogle}>
             Google Sign In
           </Button>
         </div>
