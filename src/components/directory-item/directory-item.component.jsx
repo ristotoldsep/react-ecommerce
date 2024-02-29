@@ -1,16 +1,17 @@
 import { Link } from "react-router-dom";
-import "./directory-item.styles.scss";
+import { BackgroundImage, DirectoryBody, DirectoryItemContainer } from "./directory-item.styles";
 
 const DirectoryItem = ({ category }) => {
   return (
-    <div className="directory_item_container">
-      <div
+    <DirectoryItemContainer className="directory_item_container">
+      <BackgroundImage
         className="background_image"
-        style={{
-          backgroundImage: `url(${category.imageUrl})`,
-        }}
+        // style={{
+        //   backgroundImage: `url(${category.imageUrl})`,
+        // }}
+        imageUrl = {category.imageUrl}
       />
-      <div className="directory_item_body_container">
+      <DirectoryBody className="directory_item_body_container">
         <h2>
           <Link to={`/shop/${category.title.toLowerCase()}`}>
             {category.title}
@@ -22,8 +23,8 @@ const DirectoryItem = ({ category }) => {
             Shop now
           </Link>
         </p>
-      </div>
-    </div>
+      </DirectoryBody>
+    </DirectoryItemContainer>
   );
 };
 

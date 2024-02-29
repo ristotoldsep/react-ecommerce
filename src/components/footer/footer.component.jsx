@@ -1,15 +1,13 @@
 import React from 'react';
-import './footer.styles.scss';
+import { SiteFooter } from './footer.styles';
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
 
   return (
-    <div className='footer'>
-      <div className='footer-content'>
+    <SiteFooter>
         <p>React eCommerce Shop &copy; {currentYear}. All rights reserved.</p>
-      </div>
-    </div>
+    </SiteFooter>
   );
 }
 

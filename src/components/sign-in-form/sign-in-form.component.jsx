@@ -4,7 +4,7 @@ import { useState/* , useContext */ } from "react";
 // import { getRedirectResult } from "firebase/auth";
 
 import FormInput from "../form-input/form-input.component";
-import './sign-in-form.styles.scss';
+import { SignInContainer, ButtonsContainer } from './sign-in-form.styles';
 
 // import { UserContext } from "../../contexts/user.context";
 
@@ -93,7 +93,7 @@ const SignInForm = () => {
   };
 
   return (
-    <div className="sign-in-container">
+    <SignInContainer className="sign-in-container">
 
       <h2>Already have an account?</h2>
 
@@ -118,18 +118,18 @@ const SignInForm = () => {
           value={password}
         />
 
-        <div className="buttons-container">
+        <ButtonsContainer className="buttons-container">
           <Button type="submit">Sign in</Button>
           <Button type="button" buttonType={BUTTON_TYPE_CLASSES.google} onClick={signInWithGoogle}>
             Google Sign In
           </Button>
-        </div>
+        </ButtonsContainer>
 
         {/* <button onClick={signInWithGoogleRedirect}>
           Sign in with Google redirect
         </button> */}
       </form>
-    </div>
+    </SignInContainer>
   );
 };
 

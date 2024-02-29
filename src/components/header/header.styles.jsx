@@ -1,5 +1,18 @@
-import styled from "styled-components";
+import styled, {css} from "styled-components";
 import { Link } from "react-router-dom";
+
+// Media query mixins
+const tablet = (...args) => css`
+  @media only screen and (min-width: 768px) and (max-width: 1024px) {
+    ${css(...args)}
+  }
+`;
+
+const phone = (...args) => css`
+  @media only screen and (max-width: 767px) {
+    ${css(...args)}
+  }
+`;
 
 export const NavigationContainer = styled.div`
   width: 100%;
@@ -33,6 +46,10 @@ export const NavLinksContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: flex-end;
+
+  ${phone`
+    width: 70%;
+  `}
 `;
 
 export const NavLink = styled(Link)`
