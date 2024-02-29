@@ -12,6 +12,8 @@ export const Category = () => {
   const { categoriesMap } = useContext(CategoriesContext);
   const [products, setProducts] = useState(categoriesMap[category]);
 
+  console.log(categoriesMap);
+
   useEffect(() => {
     // if URL is /shop/hats, useParams will get 'hats' and hash match it in categoriesMap
     setProducts(categoriesMap[category]);

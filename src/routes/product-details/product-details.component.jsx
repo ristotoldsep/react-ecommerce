@@ -45,6 +45,8 @@ const ProductDetails = () => {
     return <div>Loading...</div>;
   }
 
+console.log(product);
+
   return (
     <div className="product-details-container">
       <div className="product-details-image">
@@ -52,6 +54,9 @@ const ProductDetails = () => {
       </div>
       <div className="product-details-info">
         <h2>{product.name}</h2>
+        {product.productDescription && (
+          <p>{product.productDescription}</p>
+        )}
         <p className="product-price">{product.price}€</p>
         <Button onClick={addProductToCart}>
             Add to cart

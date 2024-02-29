@@ -3,6 +3,7 @@
     flex-direction: column;
     align-items: center;
     padding: 50px 30px;
+    min-height: calc(100vh - (135px + 113px));
 
     .product-details-image {
         position: relative;
