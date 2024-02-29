@@ -1,5 +1,6 @@
 import { useState/* , useContext */ } from "react";
 
+import { useNavigate } from "react-router-dom";
 // import { useEffect } from "react";
 // import { getRedirectResult } from "firebase/auth";
 
@@ -30,6 +31,8 @@ const SignInForm = () => {
 
   // const { setCurrentUser } = useContext(UserContext);
 
+  const navigate = useNavigate();
+
   const resetFormFields = () => {
     setFormFields(defaultFormFields);
   }
@@ -46,6 +49,8 @@ const SignInForm = () => {
 
       // Reset form fields after successful submission
       resetFormFields();
+
+      navigate('/');
 
     } catch (error) {
       if (error.code === "auth/invalid-credential") {
