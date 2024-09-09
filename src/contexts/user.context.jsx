@@ -15,7 +15,7 @@ const userReducer = (state, action) => {
     console.log('dispatched');
     console.log(action);
 
-    const { type, payload} = action;
+    const { type, payload } = action;
 
     switch(type) {
         case USER_ACTION_TYPES.SET_CURRENT_USER:

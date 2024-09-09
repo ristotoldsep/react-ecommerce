@@ -45,15 +45,47 @@ const clearCartItem = (cartItems, cartItemToClear) => {
 }
 
 export const CartContext = createContext({
-  isCartOpen: false,
   setIsCartOpen: () => {},
-  cartItems: [],
   addItemToCart: () => {},
   removeItemFromCart: () => {},
   clearItemFromCart: () => {},
+});
+
+const INITIAL_STATE = {
+  isCartOpen: false,
+  cartItems: [],
   cartCount: 0,
   cartTotal: 0,
-});
+}
+
+const cartReducer = (state, action) => {
+  const { type, payload } = action;
+
+  switch (type) {
+    case 'ADD_ITEM':
+      return {
+        ...state,
+        cartItems: addCartItem(state.cartItems, payload),
+      };
+    case 'REMOVE_ITEM':
+      return {
+        ...state,
+        cartItems: decreaseCartItem(state.cartItems, payload),
+      };
+    case 'CLEAR_ITEM':
+      return {
+        ...state,
+        cartItems: clearCartItem(state.cartItems, payload),
+      };
+    case 'SET_CART_OPEN':
+      return {
+        ...state,
+        isCartOpen: payload,
+      };
+    default:
+      throw new Error(`Unhandled action type: ${type} in cartReducer`);;
+  }
+};
 
 export const CartProvider = ({ children }) => {
   const [isCartOpen, setIsCartOpen] = useState(false);
