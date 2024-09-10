@@ -89,12 +89,26 @@ const SignInForm = () => {
   // }, []);
   
 
+  // const signInWithGoogle = async () => {
+  //   // const { user } = await signInWithGooglePopup(); // Destructuring response object
+  //   await signInWithGooglePopup(); 
+  //   // setCurrentUser(user);
+  //   // const userDocRef = await createUserDocumentFromAuth(user);
+  //   // console.log(response);
+  // };
+
   const signInWithGoogle = async () => {
-    // const { user } = await signInWithGooglePopup(); // Destructuring response object
-    await signInWithGooglePopup(); 
-    // setCurrentUser(user);
-    // const userDocRef = await createUserDocumentFromAuth(user);
-    // console.log(response);
+    try {
+      const { user } = await signInWithGooglePopup(); // Destructure to get user
+      // Perform any additional actions like setting the current user if needed
+  
+      console.log(user);
+  
+      // Navigate to the homepage after successful sign-in
+      navigate('/');
+    } catch (error) {
+      console.error("Error signing in with Google:", error.message);
+    }
   };
 
   return (

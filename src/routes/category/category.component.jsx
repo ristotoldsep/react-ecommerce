@@ -1,4 +1,4 @@
-import { useContext, useState, useEffect, Fragment } from "react";
+import { useContext, useState, useEffect } from "react";
 
 import { useParams } from "react-router-dom";
 
@@ -33,7 +33,7 @@ export const Category = () => {
 
         {products &&
             products.map((product) => (
-            <ProductCard key={product.id} product={product} />
+              <ProductCard key={product.id} product={product} />
             ))}
         </div>
     </div>
