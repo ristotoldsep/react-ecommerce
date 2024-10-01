@@ -1,23 +1,22 @@
 import { useContext } from "react";
 import { ReactComponent as CrownLogo } from "../../assets/crown.svg";
-// import { Link } from "react-router-dom";
 import { NavigationContainer, LogoContainer, NavLinksContainer, NavLink } from './header.styles.jsx';
+
+import { useSelector } from "react-redux";
 
 import CartIcon from "../cart-icon/cart-icon.component";
 import CartDropdown from "../cart-dropdown/cart-dropdown.component";
 
-// import { UserContext } from "../../contexts/user.context";
 import { CartContext } from "../../contexts/cart.context";
+import { selectCurrentuser } from "../../store/user/user.selector.js";
 
 import { signOutUser } from "../../utils/firebase/firebase.utils";
 
 const Header = () => {
 
-  // const { currentUser/* , setCurrentUser */ } = useContext(UserContext);
+  const currentUser = useSelector(selectCurrentuser); // Getting state from REDUX STORE
 
-  const currentUser = null;
-
-  // console.log(currentUser);
+  console.log(currentUser);
 
   // const signOutHandler = async () => {
   //   const response = await signOutUser();
@@ -38,7 +37,7 @@ const Header = () => {
           SHOP
         </NavLink>
         {currentUser ? (
-          <NavLink as="span" className="nav-link" onClick={signOutUser}>
+          <NavLink as="span" className="nav-link" title={currentUser?.displayName} onClick={signOutUser}>
             SIGN OUT
           </NavLink>
         ) : (

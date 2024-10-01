@@ -9,7 +9,7 @@ const Layout = () => {
   return (
     <Fragment>
       <Header />
-      <Outlet />
+        <Outlet />
       <Footer />
     </Fragment>
   );
