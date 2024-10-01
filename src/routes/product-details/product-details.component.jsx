@@ -3,10 +3,13 @@ import { useParams } from "react-router-dom";
 
 import './product-details.styles.scss';
 
-import { CategoriesContext } from "../../contexts/categories.context";
+// import { CategoriesContext } from "../../contexts/categories.context";
 import { CartContext } from "../../contexts/cart.context";
 
 import Button from "../../components/button/button.component";
+
+import { useSelector } from "react-redux";
+import { selectCategoriesMap } from "../../store/categories/category.selector";
 
 const convertToUrlFriendly = (name) => {
   return name.toLowerCase().replace(/\s+/g, "-");
@@ -14,7 +17,10 @@ const convertToUrlFriendly = (name) => {
 
 const ProductDetails = () => {
   const { productName } = useParams();
-  const { categoriesMap } = useContext(CategoriesContext);
+  // const { categoriesMap } = useContext(CategoriesContext);
+
+  const categoriesMap = useSelector(selectCategoriesMap);
+
   const { addItemToCart } = useContext(CartContext);
   const [product, setProduct] = useState(null);
 
