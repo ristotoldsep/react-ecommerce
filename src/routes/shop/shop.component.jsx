@@ -8,7 +8,7 @@ import Category from '../category/category.component';
 import './shop.styles.scss';
 import ProductDetails from '../product-details/product-details.component';
 import { getCategoriesAndDocuments } from '../../utils/firebase/firebase.utils';
-import { setCategoriesMap } from '../../store/categories/category.action';
+import { setCategories } from '../../store/categories/category.action';
 
 const Shop = () => {
 
@@ -16,9 +16,11 @@ const Shop = () => {
 
   useEffect(() => {
     const getCategories = async () => {
-        const categoryMap = await getCategoriesAndDocuments();
+        const categoriesArray = await getCategoriesAndDocuments();
 
-        dispatch(setCategoriesMap(categoryMap));
+        // console.log(categoriesArray);
+
+        dispatch(setCategories(categoriesArray));
     }
 
     getCategories();

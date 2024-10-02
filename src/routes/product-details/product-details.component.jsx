@@ -17,7 +17,6 @@ const convertToUrlFriendly = (name) => {
 
 const ProductDetails = () => {
   const { productName } = useParams();
-  // const { categoriesMap } = useContext(CategoriesContext);
 
   const categoriesMap = useSelector(selectCategoriesMap);
 
