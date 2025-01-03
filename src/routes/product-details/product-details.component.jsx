@@ -1,14 +1,17 @@
-import React, { useEffect, useState, useContext } from "react";
+import React, { useEffect, useState/* , useContext */ } from "react";
 import { useParams } from "react-router-dom";
 
 import './product-details.styles.scss';
 
 // import { CategoriesContext } from "../../contexts/categories.context";
-import { CartContext } from "../../contexts/cart.context";
+// import { CartContext } from "../../contexts/cart.context";
+
+import { useDispatch, useSelector } from 'react-redux';
+import { selectCartItems } from '../../store/cart/cart.selector';
+import { addItemToCart } from '../../store/cart/cart.action';
 
 import Button from "../../components/button/button.component";
 
-import { useSelector } from "react-redux";
 import { selectCategoriesMap } from "../../store/categories/category.selector";
 
 const convertToUrlFriendly = (name) => {
@@ -20,8 +23,20 @@ const ProductDetails = () => {
 
   const categoriesMap = useSelector(selectCategoriesMap);
 
-  const { addItemToCart } = useContext(CartContext);
+  // const { addItemToCart } = useContext(CartContext);
+
   const [product, setProduct] = useState(null);
+
+  const dispatch = useDispatch();
+  
+  const cartItems = useSelector(selectCartItems);
+  
+  // Prevent navigation when clicking "Add to Cart"
+  const addProductToCart = (event) => {
+    event.stopPropagation(); // Stop event from bubbling to ProductCartContainer
+    dispatch(addItemToCart(cartItems, product));
+  };
+  
 
   useEffect(() => {
     const fetchData = async () => {
@@ -42,9 +57,9 @@ const ProductDetails = () => {
     fetchData();
   }, [categoriesMap, productName]);
 
-  const addProductToCart = () => {
-    addItemToCart(product);
-  };
+  // const addProductToCart = () => {
+  //   addItemToCart(product);
+  // };
 
   if (!product) {
     return <div>Loading...</div>;

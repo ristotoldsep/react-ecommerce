@@ -1,4 +1,4 @@
-import { useContext } from "react";
+// import { useContext } from "react";
 import { ReactComponent as CrownLogo } from "../../assets/crown.svg";
 import { NavigationContainer, LogoContainer, NavLinksContainer, NavLink } from './header.styles.jsx';
 
@@ -7,8 +7,10 @@ import { useSelector } from "react-redux";
 import CartIcon from "../cart-icon/cart-icon.component";
 import CartDropdown from "../cart-dropdown/cart-dropdown.component";
 
-import { CartContext } from "../../contexts/cart.context";
+// import { CartContext } from "../../contexts/cart.context";
+
 import { selectCurrentuser } from "../../store/user/user.selector.js";
+import { selectIsCartOpen } from "../../store/cart/cart.selector.js";
 
 import { signOutUser } from "../../utils/firebase/firebase.utils";
 
@@ -25,7 +27,9 @@ const Header = () => {
   //   setCurrentUser(null);
   // }
 
-  const { isCartOpen } = useContext(CartContext);
+  // const { isCartOpen } = useContext(CartContext);
+
+  const isCartOpen = useSelector(selectIsCartOpen); // Getting state from REDUX STORE
 
   return (
     <NavigationContainer>
