@@ -45,3 +45,4 @@ export const Category = () => {
 };
 
 export default Category;
+
