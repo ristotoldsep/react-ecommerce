@@ -22,7 +22,7 @@ const CartDropdown = () => {
   };
 
   return (
-    <CartDropdownContainer>
+    <CartDropdownContainer className="cart-dropdown-container">
       <CartItems>
         {cartItems.length ? (
           cartItems.map((item) => <CartItem key={item.id} cartItem={item} />)
