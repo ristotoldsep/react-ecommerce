@@ -6,7 +6,6 @@ import logger from 'redux-logger';
 // root-reducer
 import { rootReducer } from './root-reducer';
 
-const middleWares = [logger];
 
 const persistConfig = {
     key: 'root',
@@ -16,7 +15,17 @@ const persistConfig = {
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
-const composedEnhancers = compose(applyMiddleware(...middleWares));
+const middleWares = [process.env.NODE_ENV !== 'production' && logger].filter(
+    Boolean
+);
+
+const composeEnhancer =
+    (process.env.NODE_ENV !== 'production' &&
+        window &&
+        window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) ||
+    compose;
+
+const composedEnhancers = composeEnhancer(applyMiddleware(...middleWares));
 
 export const store = createStore(persistedReducer, undefined, composedEnhancers); // second parameter is optional additional initial states so it is undefined
 
