@@ -22,20 +22,32 @@ const CartIcon = () => {
     dispatch(setIsCartOpen(!isCartOpen));
   };
 
-  // Memoizing closeCartOnClickOutside to prevent unnecessary re-creations
   const closeCartOnClickOutside = useCallback((event) => {
     const cartDropdown = document.querySelector(".cart-dropdown-container");
-    if (cartDropdown && !cartDropdown.contains(event.target)) {
-      setIsCartOpen(false);
+    const cartIcon = document.querySelector(".cart-icon-container");
+
+    if (!isCartOpen) return; // Only run this if the cart is open
+
+    if (
+        cartDropdown &&
+        !cartDropdown.contains(event.target) &&
+        cartIcon &&
+        !cartIcon.contains(event.target)
+    ) {
+        console.log("Click outside detected, closing cart");
+        dispatch(setIsCartOpen(false)); 
     }
-  }, [setIsCartOpen]); // Dependencies ensure correct state updates
+  }, [dispatch, isCartOpen]);
 
   useEffect(() => {
+    console.log("Adding event listener to body"); // Debugging log
     document.body.addEventListener("click", closeCartOnClickOutside);
+
     return () => {
-      document.body.removeEventListener("click", closeCartOnClickOutside);
+        console.log("Removing event listener from body"); // Debugging log
+        document.body.removeEventListener("click", closeCartOnClickOutside);
     };
-  }, [closeCartOnClickOutside]); // Now ESLint is happy 🎉
+}, [closeCartOnClickOutside]); // Ensure dependency is correct
 
   return (
     <CartIconContainer className="cart-icon-container" onClick={toggleIsCartOpen}>
