@@ -34,17 +34,17 @@ const CartIcon = () => {
         cartIcon &&
         !cartIcon.contains(event.target)
     ) {
-        console.log("Click outside detected, closing cart");
+        // console.log("Click outside detected, closing cart");
         dispatch(setIsCartOpen(false)); 
     }
   }, [dispatch, isCartOpen]);
 
   useEffect(() => {
-    console.log("Adding event listener to body"); // Debugging log
+    // console.log("Adding event listener to body"); // Debugging log
     document.body.addEventListener("click", closeCartOnClickOutside);
 
     return () => {
-        console.log("Removing event listener from body"); // Debugging log
+        // console.log("Removing event listener from body"); // Debugging log
         document.body.removeEventListener("click", closeCartOnClickOutside);
     };
 }, [closeCartOnClickOutside]); // Ensure dependency is correct

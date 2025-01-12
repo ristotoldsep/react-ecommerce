@@ -7,8 +7,10 @@ import "./category.styles.scss";
 // import { CategoriesContext } from "../../contexts/categories.context";
 import ProductCard from "../../components/product-card/product-card.component";
 
+import Spinner from "../../components/spinner/spinner.component";
+
 import { useSelector } from "react-redux";
-import { selectCategoriesMap } from "../../store/categories/category.selector";
+import { selectCategoriesMap, selectIsCategoriesLoading } from "../../store/categories/category.selector";
 
 export const Category = () => {
   const { category } = useParams();
@@ -17,6 +19,8 @@ export const Category = () => {
   const [products, setProducts] = useState(categoriesMap[category]);
 
   // console.log(categoriesMap);
+
+  const isLoading = useSelector(selectIsCategoriesLoading);
 
   useEffect(() => {
     // if URL is /shop/hats, useParams will get 'hats' and hash match it in categoriesMap
@@ -33,13 +37,16 @@ export const Category = () => {
                 {category}
             </h1>
         </div>
-        <div className="category-container">
-
-        {products &&
-            products.map((product) => (
-              <ProductCard key={product.id} product={product} />
-            ))}
-        </div>
+        {
+          isLoading ? <Spinner /> : (
+            <div className="category-container">
+              {products &&
+                products.map((product) => (
+                  <ProductCard key={product.id} product={product} />
+              ))}
+            </div>
+          )
+        }
     </div>
   );
 };

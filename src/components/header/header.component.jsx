@@ -18,7 +18,7 @@ const Header = () => {
 
   const currentUser = useSelector(selectCurrentuser); // Getting state from REDUX STORE
 
-  console.log(currentUser);
+  // console.log(currentUser);
 
   // const signOutHandler = async () => {
   //   const response = await signOutUser();
