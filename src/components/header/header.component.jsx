@@ -2,7 +2,7 @@
 import { ReactComponent as CrownLogo } from "../../assets/crown.svg";
 import { NavigationContainer, LogoContainer, NavLinksContainer, NavLink } from './header.styles.jsx';
 
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 
 import CartIcon from "../cart-icon/cart-icon.component";
 import CartDropdown from "../cart-dropdown/cart-dropdown.component";
@@ -12,9 +12,13 @@ import CartDropdown from "../cart-dropdown/cart-dropdown.component";
 import { selectCurrentuser } from "../../store/user/user.selector.js";
 import { selectIsCartOpen } from "../../store/cart/cart.selector.js";
 
-import { signOutUser } from "../../utils/firebase/firebase.utils";
+// import { signOutUser } from "../../utils/firebase/firebase.utils";
+
+import { signOutStart } from "../../store/user/user.action";
 
 const Header = () => {
+
+  const dispatch = useDispatch(); // Dispatch function from Redux
 
   const currentUser = useSelector(selectCurrentuser); // Getting state from REDUX STORE
 
@@ -30,6 +34,10 @@ const Header = () => {
   // const { isCartOpen } = useContext(CartContext);
 
   const isCartOpen = useSelector(selectIsCartOpen); // Getting state from REDUX STORE
+
+  const signOutUser = () => {
+    dispatch(signOutStart());
+  };
 
   return (
     <NavigationContainer>

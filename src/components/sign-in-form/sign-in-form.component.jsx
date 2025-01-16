@@ -1,4 +1,5 @@
-import { useState/* , useContext */ } from "react";
+import { useEffect, useState/* , useContext */ } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 import { useNavigate } from "react-router-dom";
 // import { useEffect } from "react";
@@ -9,15 +10,17 @@ import { SignInContainer, ButtonsContainer } from './sign-in-form.styles';
 
 // import { UserContext } from "../../contexts/user.context";
 
-import {
-  // auth,
-  // signInWithGoogleRedirect,
-  signInWithGooglePopup,
-  // createUserDocumentFromAuth,
-  signInAuthUserWithEmailAndPassword
-} from "../../utils/firebase/firebase.utils";
+// import {
+//   // auth,
+//   // signInWithGoogleRedirect,
+//   signInWithGooglePopup,
+//   // createUserDocumentFromAuth,
+//   signInAuthUserWithEmailAndPassword
+// } from "../../utils/firebase/firebase.utils";
 
 import Button, { BUTTON_TYPE_CLASSES } from "../button/button.component";
+
+import { googleSignInStart, emailSignInStart } from "../../store/user/user.action";
 
 const defaultFormFields = {
   email: "",
@@ -25,6 +28,8 @@ const defaultFormFields = {
 };
 
 const SignInForm = () => {
+  const dispatch = useDispatch();
+
   const [formFields, setFormFields] = useState(defaultFormFields);
 
   const { email, password } = formFields;
@@ -32,6 +37,15 @@ const SignInForm = () => {
   // const { setCurrentUser } = useContext(UserContext);
 
   const navigate = useNavigate();
+
+  const currentUser = useSelector((state) => state.user.currentUser);
+
+  // Redirect to the homepage if the user is already signed in
+  useEffect(() => {
+    if (currentUser) {
+      navigate("/");
+    }
+  }, [currentUser, navigate]);
 
   const resetFormFields = () => {
     setFormFields(defaultFormFields);
@@ -41,16 +55,16 @@ const SignInForm = () => {
     event.preventDefault();
 
     try {
-      const { user } = await signInAuthUserWithEmailAndPassword(email, password);
+      // const { user } = await signInAuthUserWithEmailAndPassword(email, password);
 
       // setCurrentUser(user);
       
-      console.log(user);
+      // console.log(user);
+
+      dispatch(emailSignInStart(email, password));
 
       // Reset form fields after successful submission
       resetFormFields();
-
-      navigate('/');
 
     } catch (error) {
       if (error.code === "auth/invalid-credential") {
@@ -98,17 +112,25 @@ const SignInForm = () => {
   // };
 
   const signInWithGoogle = async () => {
+    // try {
+    //   const { user } = await signInWithGooglePopup(); // Destructure to get user
+    //   // Perform any additional actions like setting the current user if needed
+  
+    //   console.log(user);
+  
+    //   // Navigate to the homepage after successful sign-in
+    //   navigate('/');
+    // } catch (error) {
+    //   console.error("Error signing in with Google:", error.message);
+    // }
+
     try {
-      const { user } = await signInWithGooglePopup(); // Destructure to get user
-      // Perform any additional actions like setting the current user if needed
-  
-      console.log(user);
-  
-      // Navigate to the homepage after successful sign-in
-      navigate('/');
+      dispatch(googleSignInStart());
     } catch (error) {
       console.error("Error signing in with Google:", error.message);
     }
+
+    
   };
 
   return (

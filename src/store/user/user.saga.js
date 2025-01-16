@@ -61,11 +61,23 @@ export function* signInWithEmail({ payload: { email, password } }) {
     }
 }
 
+/**
+ * Saga to check if the user is authenticated.
+ * 
+ * This generator function attempts to get the current authenticated user.
+ * If the user is authenticated, it proceeds to get the user snapshot.
+ * If an error occurs during the process, it dispatches a sign-in failure action.
+ * 
+ * @generator
+ * @function isUserAuthenticated
+ * @yields {Object} The result of the `call` effect.
+ * @throws Will dispatch a sign-in failure action if an error occurs.
+ */
 export function* isUserAuthenticated() {
     try {
         const userAuth = yield call(getCurrentUser);
         if (!userAuth) return;
-        yield call(getSnapshotFromUserAuth, userAuth);
+        yield call(getSnapshotFromUserAuth, userAuth); // userA
     } catch (error) {
         yield put(signInFailed(error));
     }
