@@ -13,7 +13,8 @@ import { all, call } from 'redux-saga/effects';
 // The 'rootSaga' function will typically yield an array of sagas using the 'all' effect, which allows multiple sagas to be run concurrently.
 
 import { categoriesSaga } from './categories/category.saga';
+import { userSagas } from './user/user.saga';
 
 export function* rootSaga() {
-    yield all([call(categoriesSaga)]);
+    yield all([call(categoriesSaga), call(userSagas)]);
 }

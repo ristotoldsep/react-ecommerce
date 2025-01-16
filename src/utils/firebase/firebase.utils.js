@@ -84,6 +84,7 @@ export const createUserDocumentFromAuth = async (userAuth, additionalInformation
   console.log(userDocRef);
 
   const userSnapShot = await getDoc(userDocRef);
+
   console.log(userSnapShot);
   console.log(userSnapShot.exists());
 
@@ -103,7 +104,8 @@ export const createUserDocumentFromAuth = async (userAuth, additionalInformation
     }
   }
 
-  return userDocRef;
+  // return userDocRef;
+  return userSnapShot; // Return the user snapshot to get the user data in the saga function getSnapshotFromUserAuth in user.saga.js file 
 };
 
 export const createAuthUserWithEmailAndPassword = async (email, password) => {
